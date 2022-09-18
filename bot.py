@@ -1,11 +1,12 @@
 import tweepy
 import time
+import os
 
 # Authenticate to Twitter
-api_key = process.env.API_KEY
-api_secret = process.env.API_SECRET
-access_token =  process.env.ACESS_TOKEN
-access_token_secret = process.env.ACCESS_TOKEN_SECRET
+api_key = os.environ.get('API_KEY', None)
+api_secret = os.environ.get('API_SECRET', None)
+access_token = os.environ.get('ACESS_TOKEN', None)
+access_token_secret = os.environ.get('ACCESS_TOKEN_SECRET', None)
 
 auth = tweepy.OAuth1UserHandler(
    api_key, api_secret, access_token, access_token_secret
@@ -13,6 +14,7 @@ auth = tweepy.OAuth1UserHandler(
 
 api = tweepy.API(auth)
 
+# Post every 10 minutes
 while True:
     api.update_status_with_media("", "fotodeps.jpeg")
     time.sleep(60*10)
