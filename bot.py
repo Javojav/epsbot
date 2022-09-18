@@ -1,10 +1,11 @@
 import tweepy
+import time
 
 # Authenticate to Twitter
-api_key = ""
-api_secret = ""
-access_token = ""
-access_token_secret = ""
+api_key = process.env.API_KEY
+api_secret = process.env.API_SECRET
+access_token =  process.env.ACESS_TOKEN
+access_token_secret = process.env.ACCESS_TOKEN_SECRET
 
 auth = tweepy.OAuth1UserHandler(
    api_key, api_secret, access_token, access_token_secret
@@ -12,4 +13,6 @@ auth = tweepy.OAuth1UserHandler(
 
 api = tweepy.API(auth)
 
-api.update_status_with_media("", "fotodeps.jpeg")
+while True:
+    api.update_status_with_media("", "fotodeps.jpeg")
+    time.sleep(60*10)
